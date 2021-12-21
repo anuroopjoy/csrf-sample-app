@@ -21,4 +21,19 @@ export class AppService {
   writeFile(path: string, data: string) {
     return fs.writeFileSync(path, data);
   }
+
+  getCities(): { name: string; image: string; alt: string }[] {
+    return [
+      {
+        name: 'trulli',
+        image: 'pic_trulli.jpg',
+        alt: 'Italian Trulli',
+      },
+      {
+        name: 'chania',
+        image: 'img_chania.jpg',
+        alt: 'Chania',
+      },
+    ];
+  }
 }

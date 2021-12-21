@@ -5,6 +5,7 @@ import {
   Post,
   UseGuards,
   Body,
+  Response,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
@@ -21,16 +22,18 @@ export class AppController {
   @Public()
   @UseGuards(LocalAuthGuard)
   @Get('auth/login')
-  async login(@Request() req: any) {
-    console.log('login');
-    return {
-      csrfToken: req.csrfToken(),
-      token: await this.authService.login(req.user),
-    };
+  async login(@Request() req: any, @Response() res: any) {
+    res.cookie('XSRF-TOKEN', req.csrfToken());
+    res.send(await this.authService.login(req.user));
   }
 
-  @Post('/transfer')
+  @Post('transfer')
   transfer(@Body() params: { name: string; amount: number }): boolean {
     return this.appService.transfer(params);
+  }
+
+  @Get('cities')
+  getCities(): { name: string; image: string; alt: string }[] {
+    return this.appService.getCities();
   }
 }
