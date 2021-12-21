@@ -24,7 +24,8 @@ export class AppController {
   @Get('auth/login')
   async login(@Request() req: any, @Response() res: any) {
     res.cookie('XSRF-TOKEN', req.csrfToken());
-    res.send(await this.authService.login(req.user));
+    res.cookie('jwt', (await this.authService.login(req.user)).access_token);
+    res.send(true);
   }
 
   @Post('transfer')
