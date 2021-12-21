@@ -11,11 +11,11 @@ import { AuthInterceptor } from './auth.interceptor';
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AuthInterceptor,
+    //   multi: true,
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: XsrfInterceptor,

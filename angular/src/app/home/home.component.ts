@@ -20,4 +20,8 @@ export class HomeComponent implements OnInit {
       alt: string;
     }[];
   }
+
+  transfer() {
+    return this.homeService.transfer({ name: 'John', amount: 10000 });
+  }
 }
