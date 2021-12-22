@@ -22,6 +22,6 @@ export class HomeComponent implements OnInit {
   }
 
   transfer() {
-    return this.homeService.transfer({ name: 'John', amount: 10000 });
+    return this.homeService.transfer({ name: 'User', amount: 10000 });
   }
 }
