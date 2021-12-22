@@ -1,26 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom, tap } from 'rxjs';
-import { AuthService } from '../auth.service';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   login({ username, password }: { username: string; password: string }) {
     return lastValueFrom(
-      this.http
-        .get('http://localhost:3000/auth/login', {
-          params: { username, password },
-          withCredentials: true,
-        })
-        .pipe(
-          tap(({ access_token }: any) =>
-            this.authService.setToken(access_token)
-          )
-        )
+      this.http.get('http://localhost:3000/auth/login', {
+        params: { username, password },
+        withCredentials: true,
+      })
     );
   }
 }
